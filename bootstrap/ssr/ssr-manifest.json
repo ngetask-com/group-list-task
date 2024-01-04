@@ -1,0 +1,10 @@
+{
+  "resources/css/app.css": [
+  ],
+  "resources/js/Pages/GroupList/Index.vue": [
+  ],
+  "resources/js/bootstrap.js": [
+  ],
+  "resources/js/ssr.js": [
+  ]
+}
