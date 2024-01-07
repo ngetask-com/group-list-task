@@ -5,6 +5,16 @@ import createServer from '@inertiajs/vue3/server'
 import { renderToString } from '@vue/server-renderer'
 import { createSSRApp, h } from 'vue'
 
+// Vuetify
+import '@mdi/font/scss/materialdesignicons.scss'
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+
+const vuetify = createVuetify({
+  ssr: true
+})
+
+
 createServer(page =>
   createInertiaApp({
     page,
@@ -18,6 +28,7 @@ createServer(page =>
         render: () => h(App, props),
       })
       .use(plugin)
+      .use(vuetify)
       .mount(el)
     },
   }),

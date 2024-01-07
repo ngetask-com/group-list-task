@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from "@vitejs/plugin-vue";
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineConfig({
     plugins: [
@@ -13,22 +14,27 @@ export default defineConfig({
                     // to instead re-write asset URLs to point to the Vite
                     // server instead.
                     base: null,
- 
+
                     // The Vue plugin will parse absolute URLs and treat them
                     // as absolute paths to files on disk. Setting this to
                     // `false` will leave absolute URLs un-touched so they can
                     // reference assets in the public directory as expected.
                     includeAbsolute: false,
                 },
-            },
+            }
         }),
+        vuetify({ styles: 'sass' }),
         laravel({
             input: ['resources/js/app.js'],
             ssr: 'resources/js/ssr.js',
             refresh: true,
         }),
+
     ],
-    server: { 
+    ssr: {
+        noExternal: [/^vuetify/],
+    },
+    server: {
         watch: {
             usePolling: true,
         },

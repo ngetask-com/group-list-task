@@ -6,12 +6,16 @@
 
 import axios from 'axios';
 
-const isServer = typeof window === 'undefined'
-
-if (! isServer) {
-    window.axios = axios;
-    window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+if (typeof window === 'undefined') {
+    global.window = {};
+    global.document = {
+        getElementById: function(){},
+        createElement: function(){}
+    };
 }
+
+window.axios = axios;
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 /**
